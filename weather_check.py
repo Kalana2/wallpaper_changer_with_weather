@@ -18,7 +18,7 @@ class WeatherCheck(Process):
             weather = self.__getWeatherReport(self.api_key, self.city)
             # self.__updateWeather_obj(weather)
             if weather:
-                self.queries.put(weather)
+                self.queries.put(weather['description'])
                 # print("weather is ", weather )
             else:
                 print(f"Failed to retrive  weahter data for {self.city}")

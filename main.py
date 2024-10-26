@@ -9,7 +9,7 @@ import engine
 
 
 
-city = "Colombo"
+city = "colombo"o
 api_key = "3ecde5c26ac89c3412bba58e4df629db"
 
 access_key = 'UpI8zJvXTJj-AmnaIpeJ_cK7WxrLcDTUtNspOthpiG8'
@@ -33,6 +33,5 @@ if __name__== "__main__":
 
     weatherEngine.join()
     downloader.join()
-    engine.join()
 
 

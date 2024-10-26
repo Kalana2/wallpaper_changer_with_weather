@@ -25,8 +25,7 @@ class ImageDownloder(Process):
                 print("Same query is requested")
                 query = self.queries.get()
                 continue
-
-            self.__search_photos(self.access_key, self.page, query)
+            self.__search_photos(self.access_key,query, self.page)
 
             time.sleep(self.delay)
 
@@ -35,6 +34,7 @@ class ImageDownloder(Process):
                       
     def __search_photos(self, access_key, query, page=1):
                 url = f'https://api.unsplash.com/search/photos?client_id={access_key}&page={page}&query={query}'
+                # url = f'https://api.unsplash.com/search/photos?client_id={access_key}&page={page}&query=sri+lanka'
                 response = requests.get(url)
                 
                 if response.status_code == 200:
