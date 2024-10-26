@@ -1,10 +1,10 @@
 import json
-from threading import Thread
 import requests 
 import time
-from queue import Queue
+from multiprocessing import Process
 
-class WeatherCheck(Thread):
+
+class WeatherCheck(Process):
 
     def __init__(self, api_key, city, queries, delay = 5) :
         super(WeatherCheck, self).__init__()
@@ -14,12 +14,16 @@ class WeatherCheck(Thread):
         self.delay = delay
 
     def run(self):
-        # while True:
-         weather = self.__getWeatherReport(self.api_key, self.city)
-         self.__updateWeather_obj(weather)
-         self.queries.put(weather)
-         print("weather is ", weather )
-         time.sleep(self.delay)
+        while True:
+            weather = self.__getWeatherReport(self.api_key, self.city)
+            # self.__updateWeather_obj(weather)
+            if weather:
+                self.queries.put(weather)
+                print("weather is ", weather )
+            else:
+                print(f"Failed to retrive  weahter data for {self.city}")
+        
+            time.sleep(self.delay)
 
 
     def __updateWeather_obj(self, weather):
@@ -37,3 +41,4 @@ class WeatherCheck(Thread):
             wether = jsonContent["weather"]
             if wether:
                 return wether[0]
+            return None
