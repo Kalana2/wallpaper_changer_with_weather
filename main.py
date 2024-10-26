@@ -9,7 +9,7 @@ import engine
 
 
 
-city = "colombo"o
+city = "colombo"
 api_key = "3ecde5c26ac89c3412bba58e4df629db"
 
 access_key = 'UpI8zJvXTJj-AmnaIpeJ_cK7WxrLcDTUtNspOthpiG8'
