@@ -1,9 +1,13 @@
 import requests
 import json
 import time
+from multiprocessing import Queue
+
 import weather_check
 import image_downloader
-from multiprocessing import Queue
+import engine
+
+
 
 city = "Colombo"
 api_key = "3ecde5c26ac89c3412bba58e4df629db"
@@ -24,7 +28,11 @@ if __name__== "__main__":
     downloader = image_downloader.ImageDownloder(access_key, queries, images)
     downloader.start()
     
+    engine = engine.Engine(images)
+    engine.start()
+
     weatherEngine.join()
     downloader.join()
+    engine.join()
 
 

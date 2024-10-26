@@ -62,6 +62,8 @@ class ImageDownloder(Process):
             with open(fileName,'wb') as f:
                 f.write(res.content)
             
+            self.imagers.put(fileName)
+
             print("Image sucessfuly downloaded : ", fileName)
 
         else:
