@@ -15,12 +15,13 @@ if __name__== "__main__":
     print("starting dynamic wallpaper")
 
     queries = Queue()
+    images = Queue()
     weather ={}
 
     weatherEngine = weather_check.WeatherCheck(api_key, city, queries)
     weatherEngine.start()
 
-    downloader = image_downloader.ImageDownloder(access_key, queries)
+    downloader = image_downloader.ImageDownloder(access_key, queries, images)
     downloader.start()
     
     weatherEngine.join()
