@@ -1,50 +1,42 @@
-from collections.abc import Callable
-from typing import Any, Iterable, Mapping
+import time
 import requests
 from threading import Thread
 import json
 
 
 class ImageDownloder(Thread):
-    def __init__(self, acces_key, query, page = 1):
+    def __init__(self, acces_key, queries, page = 1, delay = 5):
         super(ImageDownloder, self).__init__()
         self.acces_key = acces_key
-        self.params = {
-            'page': page,
-            'query': query
-        }
-        self.headers = {
-        'Authorization': f'Client-ID {access_key}'
-    }
+        self.queries = queries
+        self.page = page
+        self.delay = delay
+
+
     
 
-    def run(self, headers, params):
-         while True:
-            url = 'https://api.unsplash.com/search/photos'
-            response = requests.get(url, headers=headers, params=params)
+    def run(self):
+        query = self.queries.get()
+        print("Query",query)
+        while query is not None:
+            self.__search_photos(self.acces_key, self.page, query)
+            # time.sleep(self.delay)
+            query = self.queries.get()
+            
 
 
+    def __search_photos(self, access_key, query, page=1):
+        url = f'https://api.unsplash.com/search/photos?client_id={access_key}&page={page}&query={query}'
+        response = requests.get(url)
+        
+        if response.status_code == 200:
+            response_json = json.loads(response.content)
+            results = response_json['results']
+            print(len(results))
+        # if response.status_code == 200:
+        #     jasonContent = json.loads(response.content)
+        #     wether = jasonContent["result"]
+        #     if wether:
+        #         return wether[0]
 
-def search_photos(query, page=1):
-    access_key = 'UpI8zJvXTJj-AmnaIpeJ_cK7WxrLcDTUtNspOthpiG8'
-    url = 'https://api.unsplash.com/search/photos'
 
-    # Parameters for the search query
-    params = {
-        'page': page,
-        'query': query
-    }
-
-    # Headers for the request
-    headers = {
-        'Authorization': f'Client-ID {access_key}'
-    }
-
-    # Make the request to the Unsplash API
-    response = requests.get(url, headers=headers, params=params)
-
-    # Check the response status code
-    if response.status_code == 200:
-        return response.json()  # Return the JSON response
-    else:
-        raise Exception(f'Failed to authenticate: {response.status_code} - {response.json()}')
