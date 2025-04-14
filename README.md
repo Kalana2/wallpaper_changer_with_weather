@@ -1,5 +1,9 @@
 # 🌦️ Dynamic Weather-Based Wallpaper Changer
 
+
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+
 This Python-based project is a smart desktop wallpaper engine that automatically changes your wallpaper based on real-time weather conditions for a given location — making your workspace visually dynamic and mood-matching!
 
 ## 💡 Features
