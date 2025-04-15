@@ -82,8 +82,8 @@ python main.py
 Pull requests are welcome! If you have ideas for extending to Windows or MacOS, feel free to contribute.
 
 ---
-
+<!--
 ## 📜 License
 
 [MIT](LICENSE) — free for personal and commercial use.
-
+-->
